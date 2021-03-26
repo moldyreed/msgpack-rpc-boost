@@ -101,13 +101,13 @@ public:
     ~type() { }
 
     void get()
-        { future::get<msgpack::type::nil>(); }
+        { future::get<msgpack::type::nil_t>(); }
 
     void get(auto_zone* z)
-        { future::get<msgpack::type::nil>(z); }
+        { future::get<msgpack::type::nil_t>(z); }
 
     void result() const
-        { future::result().as<msgpack::type::nil>(); }
+        { future::result().as<msgpack::type::nil_t>(); }
 };
 
 
@@ -123,7 +123,7 @@ T future::get()
 template <> inline
 void future::get<void>()
 {
-    get_impl().as<msgpack::type::nil>();
+    get_impl().as<msgpack::type::nil_t>();
 }
 
 template <typename T>
@@ -139,7 +139,7 @@ void future::get<void>(auto_zone* z)
 {
     msgpack::object obj = get_impl();
     *z = std::move(zone());
-    obj.as<msgpack::type::nil>();
+    obj.as<msgpack::type::nil_t>();
 }
 
 template <typename T>
